@@ -1,24 +1,47 @@
-# README
+![](https://img.shields.io/badge/Microverse-blueviolet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby on Rails blog App
 
-Things you may want to cover:
+## Project requirements
 
-* Ruby version
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/sneak_peek.md)
 
-* System dependencies
+### First phase - setup and controllers
 
-* Configuration
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/Setup_Controllers_project.md)
 
-* Database creation
+## Built With
 
-* Database initialization
+- Major languages: Ruby
+- Framework: [Rails](https://rubyonrails.org/)
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the following commands:</br>
+`git clone https://github.com/Hombre2014/RoR-blog`</br>
+`cd Ror-blog`</br>
+`bundle install`</br>
+`rails s`</br>
+Open a browser and go to: `https://localhost:3000` to view the app.
 
-* Deployment instructions
+## Author
 
-* ...
+👤 **Yuriy Chamkoriyski**
+
+- GitHub: [@Hombre2014](https://github.com/Hombre2014)
+- Twitter: [@Chamkoriyski](https://twitter.com/Chamkoriyski)
+- LinkedIn: [axebit](https://linkedin.com/in/axebit)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/Hombre2014/hellorails/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## 📝 License
+
+This project is [MIT](./license.md) licensed.
