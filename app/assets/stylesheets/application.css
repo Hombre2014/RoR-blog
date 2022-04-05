@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+.top {
+  text-align: center;
+}
+
+.body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.user {
+  display: flex;
+  column-gap: 2rem;
+  margin-top: 1rem;
+}
+
+.user-block {
+  width: 60%;
+}
+
+.user-block > h4 {
+  float: right;
+}

@@ -1,3 +1,26 @@
-<h1>Single user</h1>
+<% @users = User.all; %>
+<% @posts = Post.all; %>
+<% current_user = @users.find_by(id: params[:id]) %>
+<h2><%= current_user.name %>'s page</h2>
+<div class="body">
+  <div class="user">
+    <img src="<%= current_user.photo %>" alt="<%= current_user.name %>" width="180" height="auto">
+    <div class="user-block">
+      <h3><%= current_user.name %></h3>
+      <h4>Number of posts: <%= current_user.posts_counter %></h4>
+    </div>
+  </div>
+</div>
 <h2>Bio</h2>
-<h3>Posts</h3>
+<p><%= current_user.bio %></p>
+<h2>Last three posts</h2>
+<% @posts_per_user = current_user.posts %>
+<% @posts_per_user.first(3).each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.text %></p>
+  <div class="post-meta">
+    <span class="comments">Comments: </span><%= post.comments_counter %>
+    <span class="likes">Likes: </span><%= post.likes_counter %>
+  </div>
+<% end %>
+<button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</button>

@@ -1,4 +1,8 @@
-<h1>All the posts from a user</h1>
-<h3>Post number 1</h3>
-<h3>Post number 2</h3>
-<h3>Post number 3</h3>
+<% @users = User.all; %>
+<% current_user = @users.find_by(id: params[:user_id]) %>
+<h1>All the posts from <%= current_user.name %></h1>
+<% @posts_per_user = @users.find_by(id: params[:user_id]).posts %>
+<% @posts_per_user.each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.text %></p>
+<% end %>
