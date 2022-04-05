@@ -5,7 +5,7 @@
     <div class="user">
       <img src="<%= user.photo %>" alt="<%= user.name %>" width="180" height="auto">
       <div class="user-block">
-        <h3><a href="/users/<%= user.id %>"><%= user.name %></a></h3>
+        <h3><a class="user-link" href="/users/<%= user.id %>"><%= user.name %></a></h3>
         <h4>Number of posts: <%= user.posts_counter %></h4>
       </div>
     </div>

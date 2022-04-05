@@ -1,2 +1,26 @@
-<h1>Single post page - Title</h1>
-<p>Single post body</p>
+<% @users = User.all; %>
+<% @posts = Post.all; %>
+<% current_user = @users.find_by(id: params[:user_id]) %>
+<% @posts_per_user = current_user.posts %>
+<% current_post = @posts.find_by(id: params[:id]) %>
+<div class="body">
+  <div class="one-post">
+    <div class="one-post-meta">
+      <h2 class="single-post"><%= current_post.title %> by <%= current_user.name %></h2>
+      <div class="post-meta">
+        <span class="comment">Comments: </span><%= current_post.comments_counter || 0 %>
+        <span class="likes">Likes: </span><%= current_post.likes_counter || 0 %>
+      </div>
+    </div>
+    <p><%= current_post.text %></p>
+  </div>
+  <div class="comments">
+    <% @comments_per_post = current_post.comments %>
+    <% @comments_per_post.each do |comment| %>
+    <div class="comments-meta">
+      <h4><%= @users.find_by(id: comment.author_id).name %>: </h4>
+      <p><%= comment.text %></p>
+    </div>
+    <% end %>
+  </div>
+</div>

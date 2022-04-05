@@ -1,6 +1,7 @@
 <% @users = User.all; %>
 <% @posts = Post.all; %>
 <% current_user = @users.find_by(id: params[:id]) %>
+<% @posts_per_user = current_user.posts %>
 <h2><%= current_user.name %>'s page</h2>
 <div class="body">
   <div class="user">
@@ -10,17 +11,22 @@
       <h4>Number of posts: <%= current_user.posts_counter %></h4>
     </div>
   </div>
-</div>
-<h2>Bio</h2>
-<p><%= current_user.bio %></p>
-<h2>Last three posts</h2>
-<% @posts_per_user = current_user.posts %>
-<% @posts_per_user.first(3).each do |post| %>
-  <h3><%= post.title %></h3>
-  <p><%= post.text %></p>
-  <div class="post-meta">
-    <span class="comments">Comments: </span><%= post.comments_counter %>
-    <span class="likes">Likes: </span><%= post.likes_counter %>
+  <div class="bio">
+    <h2>Bio</h2>
+    <p><%= current_user.bio %></p>
   </div>
-<% end %>
-<button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</button>
+  <h2>Last three posts</h2>
+  <% @posts_per_user.first(3).each do |post| %>
+    <div class="three-posts">
+      <h3><a href="/users/<%= current_user.id %>/posts/<%= post.id %>"><%= post.title %></a></h3>
+      <p><%= truncate(post.text, length: 300) %></p>
+      <div class="post-meta">
+        <span class="comment">Comments: </span><%= post.comments_counter || 0 %>
+        <span class="likes">Likes: </span><%= post.likes_counter || 0 %>
+      </div>
+    </div>
+  <% end %>
+  <div class="btn-div">
+    <button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</button>
+  </div>
+</div>
