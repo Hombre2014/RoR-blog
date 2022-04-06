@@ -17,16 +17,9 @@
   </div>
   <h2>Last three posts</h2>
   <% @posts_per_user.first(3).each do |post| %>
-    <div class="three-posts">
-      <h3><a href="/users/<%= current_user.id %>/posts/<%= post.id %>"><%= post.title %></a></h3>
-      <p><%= truncate(post.text, length: 300) %></p>
-      <div class="post-meta">
-        <span class="comment">Comments: </span><%= post.comments_counter || 0 %>
-        <span class="likes">Likes: </span><%= post.likes_counter || 0 %>
-      </div>
-    </div>
+  <%= render partial: "post", locals: { post: post, current_user: current_user } %>
   <% end %>
-  <div class="btn-div">
-    <button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</button>
+  <div class="btn-block">
+    <button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</a></button>
   </div>
 </div>
