@@ -1,0 +1,4 @@
+<div class="comments-meta">
+  <h4 class="name"><%= @users.find_by(id: comment.author_id).name %>: </h4>
+  <p class="comment-text"><%= comment.text %></p>
+</div>

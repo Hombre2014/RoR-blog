@@ -4,13 +4,7 @@
 <% @posts_per_user = current_user.posts %>
 <h2><%= current_user.name %>'s page</h2>
 <div class="body">
-  <div class="user">
-    <img src="<%= current_user.photo %>" alt="<%= current_user.name %>" width="180" height="auto">
-    <div class="user-block">
-      <h3><%= current_user.name %></h3>
-      <h4>Number of posts: <%= current_user.posts_counter %></h4>
-    </div>
-  </div>
+  <%= render partial: "user", locals: { current_user: current_user } %>
   <div class="bio">
     <h2>Bio</h2>
     <p><%= current_user.bio %></p>

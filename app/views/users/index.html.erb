@@ -1,13 +1,7 @@
 <h2>Our members</h2>
 <% @users = User.all; %>
-<% @users.each do |user| %>
+<% @users.each do |current_user| %>
   <div class="body">
-    <div class="user">
-      <img src="<%= user.photo %>" alt="<%= user.name %>" width="180" height="auto">
-      <div class="user-block">
-        <h3><a class="user-link" href="/users/<%= user.id %>"><%= user.name %></a></h3>
-        <h4>Number of posts: <%= user.posts_counter %></h4>
-      </div>
-    </div>
+    <%= render partial: "user", locals: { current_user: current_user } %>
   </div>
 <% end %>

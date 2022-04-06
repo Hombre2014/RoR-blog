@@ -3,13 +3,7 @@
 <div class="body">
   <h2>All the posts from <%= current_user.name %></h2>
   <div>
-    <div class="user">
-      <img src="<%= current_user.photo %>" alt="<%= current_user.name %>" width="180" height="auto">
-      <div class="user-block">
-        <h3><%= current_user.name %></h3>
-        <h4>Number of posts: <%= current_user.posts_counter %></h4>
-      </div>
-    </div>
+    <%= render partial: "users/user", locals: { current_user: current_user } %>
   </div>
   <% @posts_per_user = @users.find_by(id: params[:user_id]).posts %>
   <% @posts_per_user.first(3).each do |post| %>
@@ -18,10 +12,7 @@
     <h3>Comments:</h3>
     <div class="comments">
       <% @comments_per_post.first(5).each do |comment| %>
-      <div class="comments-meta">
-        <h4><%= @users.find_by(id: comment.author_id).name %>: </h4>
-        <p><%= comment.text %></p>
-      </div>
+      <%= render partial: "comment", locals: { comment: comment }%>
       <% end %>
     </div>
   <% end %>
