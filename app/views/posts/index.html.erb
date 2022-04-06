@@ -1,4 +1,19 @@
-<h1>All the posts from a user</h1>
-<h3>Post number 1</h3>
-<h3>Post number 2</h3>
-<h3>Post number 3</h3>
+<div class="body">
+  <h2>All the posts from <%= @user.name %></h2>
+  <div>
+    <%= render partial: "users/user", locals: { user: @user } %>
+  </div>
+  <% @user.posts.each do |post| %>
+    
+    <%= render partial: "users/post", locals: { post: post, user: @user } %>
+    <h3>Comments:</h3>
+    <div class="comments">
+      <% Post.find_by(id: post.id).last_5_comments.each do |comment| %>
+      <%= render partial: "comment", locals: { comment: comment }%>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="btn-block">
+    <button class="btn"><a class="link-btn" href="/users/<%= @user.id %>/posts">Next</a></button>
+  </div>
+</div>

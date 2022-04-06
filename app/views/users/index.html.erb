@@ -1,5 +1,6 @@
-<h1>Welcome to the Ruby on Rails Blog</h1>
-<h2>Posts</h2>
-<h3>Post number 1</h3>
-<h3>Post number 2</h3>
-<h3>Post number 3</h3>
+<h2>Our members</h2>
+<% @users.each do |user| %>
+  <div class="body">
+    <%= render partial: "user", locals: { user: user } %>
+  </div>
+<% end %>
