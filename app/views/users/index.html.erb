@@ -1,7 +1,6 @@
 <h2>Our members</h2>
-<% @users = User.all; %>
-<% @users.each do |current_user| %>
+<% @users.each do |user| %>
   <div class="body">
-    <%= render partial: "user", locals: { current_user: current_user } %>
+    <%= render partial: "user", locals: { user: user } %>
   </div>
 <% end %>

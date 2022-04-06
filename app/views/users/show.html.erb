@@ -1,19 +1,15 @@
-<% @users = User.all; %>
-<% @posts = Post.all; %>
-<% current_user = @users.find_by(id: params[:id]) %>
-<% @posts_per_user = current_user.posts %>
-<h2><%= current_user.name %>'s page</h2>
+<h2><%= @user.name %>'s page</h2>
 <div class="body">
-  <%= render partial: "user", locals: { current_user: current_user } %>
+  <%= render partial: "user", locals: { user: @user } %>
   <div class="bio">
     <h2>Bio</h2>
-    <p><%= current_user.bio %></p>
+    <p><%= @user.bio %></p>
   </div>
   <h2>Last three posts</h2>
-  <% @posts_per_user.first(3).each do |post| %>
-  <%= render partial: "post", locals: { post: post, current_user: current_user } %>
+  <% @user.last_3_posts.each do |post| %>
+  <%= render partial: "post", locals: { post: post, user: @user } %>
   <% end %>
   <div class="btn-block">
-    <button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">See all posts</a></button>
+    <button class="btn"><a class="link-btn" href="/users/<%= @user.id %>/posts">See all posts</a></button>
   </div>
 </div>

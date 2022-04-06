@@ -1,22 +1,19 @@
-<% @users = User.all; %>
-<% current_user = @users.find_by(id: params[:user_id]) %>
 <div class="body">
-  <h2>All the posts from <%= current_user.name %></h2>
+  <h2>All the posts from <%= @user.name %></h2>
   <div>
-    <%= render partial: "users/user", locals: { current_user: current_user } %>
+    <%= render partial: "users/user", locals: { user: @user } %>
   </div>
-  <% @posts_per_user = @users.find_by(id: params[:user_id]).posts %>
-  <% @posts_per_user.first(3).each do |post| %>
-    <% @comments_per_post = Post.find_by(id: post.id).comments %>
-    <%= render partial: "users/post", locals: { post: post, current_user: current_user } %>
+  <% @user.posts.each do |post| %>
+    
+    <%= render partial: "users/post", locals: { post: post, user: @user } %>
     <h3>Comments:</h3>
     <div class="comments">
-      <% @comments_per_post.first(5).each do |comment| %>
+      <% Post.find_by(id: post.id).last_5_comments.each do |comment| %>
       <%= render partial: "comment", locals: { comment: comment }%>
       <% end %>
     </div>
   <% end %>
   <div class="btn-block">
-    <button class="btn"><a class="link-btn" href="/users/<%= current_user.id %>/posts">Next</a></button>
+    <button class="btn"><a class="link-btn" href="/users/<%= @user.id %>/posts">Next</a></button>
   </div>
 </div>
