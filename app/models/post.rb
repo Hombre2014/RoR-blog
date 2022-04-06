@@ -14,4 +14,7 @@ class Post < ApplicationRecord
   def update_users_posts_counter
     author.increment!(:posts_counter)
   end
+
+  validates :title, presence: true
+  validates :text, presence: true, length: { minimum: 1 }
 end
