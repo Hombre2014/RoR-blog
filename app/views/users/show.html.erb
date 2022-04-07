@@ -5,6 +5,7 @@
     <h2>Bio</h2>
     <p><%= @user.bio %></p>
   </div>
+  <%= render partial: 'posts/new' %>
   <h2>Last three posts</h2>
   <% @user.last_3_posts.each do |post| %>
   <%= render partial: "post", locals: { post: post, user: @user } %>
@@ -12,5 +13,4 @@
   <div class="btn-block">
     <button class="btn"><a class="link-btn" href="/users/<%= @user.id %>/posts">See all posts</a></button>
   </div>
-  <%= render partial: 'posts/new' %>
 </div>
