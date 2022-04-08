@@ -30,6 +30,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/forms_project.md)
 
+### Phase 7 - validations, model specs, and n+1 problems
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_validations_model_spec_n+1.md)
+
 ## Built With
 
 - Major languages: Ruby
