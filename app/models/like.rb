@@ -9,4 +9,7 @@ class Like < ApplicationRecord
   def update_posts_likes_counter
     post.increment!(:likes_counter)
   end
+
+  validates :author_id, presence: true
+  validates :post_id, presence: true
 end
