@@ -4,10 +4,10 @@ class LikesController < ApplicationController
     @post = Post.find(like_params[:post_id])
 
     if @like.save
-      flash[:notice] = "Like successfully created"
+      flash[:notice] = 'Successfully liked the post.'
       redirect_to user_post_path(@post)
     else
-      flash[:notice] = "Adding a like failed"
+      flash[:alert] = 'Adding a like failed.'
       render :new, status: :unprocessable_entity
     end
   end

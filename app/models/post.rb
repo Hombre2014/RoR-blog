@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   validates :text, presence: true, length: { in: 1..2500 }
 
   def last_5_comments
-    comments.order(created_at: :desc).limit(5)
+    comments.order(created_at: :desc).includes(:author).limit(5)
   end
 
   after_save :update_users_posts_counter
