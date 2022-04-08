@@ -1,0 +1,16 @@
+<%= form_with model: Comment.new, url: "/users/#{current_user.id}/posts/#{@post.id}/create_comment" do |form| %>
+  <%= form.hidden_field :author_id, value: current_user.id %>
+  <%= form.hidden_field :post_id, value: @post.id %>
+  <div class="name-meta">
+    <h3>Commenter's name:</h3>
+    <a href="<%= users_path + '/' + current_user.id.to_s %>"><%= current_user.name %></a>
+  </div>
+  <div class="text-field">
+    <%= form.label :text %><br>
+    <%= form.text_area :text, placeholder: 'Leave a comment' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -18,13 +18,17 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/creating_data_model_project.md)
 
-### Phase 3 - processing data in models
+### Phase 4 - processing data in models
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/Processing_data_model_project.md)
 
-### Phase 4 - views
+### Phase 5 - views
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/Views_project.md)
+
+### Phase 6 - add forms
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/forms_project.md)
 
 ## Built With
 

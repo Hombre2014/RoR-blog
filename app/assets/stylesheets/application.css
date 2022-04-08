@@ -15,6 +15,7 @@
  */
 body {
   font-family: "Helvetica Neue", sans-serif;
+  background-color: #d1f5f4;
 }
 
 .top {
@@ -39,6 +40,13 @@ h2 {
   margin-top: 1rem;
 }
 
+.btn {
+  padding: 8px 6px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
 .user-link,
 .link-btn {
   text-decoration: none;
@@ -54,6 +62,7 @@ h2 {
   width: 100%;
   border: 2px solid #000;
   padding: 1rem;
+  border-radius: 12px;
 }
 
 h4,
@@ -62,6 +71,7 @@ p {
 }
 
 .photo {
+  border-radius: 12px;
   border: 2px solid #000;
 }
 
@@ -73,6 +83,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-radius: 12px;
   margin-top: 2rem;
   border: 2px solid #000;
   padding: 1rem;
@@ -89,10 +100,12 @@ p {
   padding: 1rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  border-radius: 12px;
 }
 
 .comments {
   border: 2px solid #4b4b4b;
+  border-radius: 12px;
   padding: 1rem;
   margin-top: 1rem;
 }
@@ -100,12 +113,6 @@ p {
 .btn-block {
   margin: 0 auto;
   text-align: center;
-}
-
-.btn {
-  margin: 0 auto;
-  margin-top: 1rem;
-  width: fit-content;
 }
 
 .comments-meta {
@@ -129,6 +136,7 @@ p {
 .one-post {
   border: 2px solid #000;
   padding: 1rem;
+  border-radius: 12px;
 }
 
 .one-post-meta {
@@ -167,4 +175,31 @@ a {
 
 a:hover {
   color: #2974d4;
+}
+
+.name-meta {
+  display: flex;
+  align-items: baseline;
+  column-gap: 1rem;
+}
+
+.text-field {
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 350px;
+  height: 120px;
+  margin-top: 1rem;
+}
+
+input {
+  margin: 1rem 0;
+  height: 1.5rem;
+}
+
+.like-comment {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }

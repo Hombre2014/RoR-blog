@@ -9,4 +9,8 @@ class Comment < ApplicationRecord
   def update_posts_comments_counter
     post.increment!(:comments_counter)
   end
+
+  validates :author_id, presence: true
+  validates :post_id, presence: true
+  validates :text, presence: true, length: { minimum: 1 }
 end
