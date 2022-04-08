@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   def current_user
-    User.first
+    User.find(6)
   end
 
   helper_method :current_user
