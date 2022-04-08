@@ -9,8 +9,10 @@
     </div>
     <p><%= @post.text %></p>
   </div>
-  <%= render partial: "leave_comment", locals: { post: @post, user: @user } %>
-  <%= render partial: "like", locals: { post: @post, user: @user } %>
+  <div class="like-comment">
+    <%= render partial: "leave_comment", locals: { post: @post, user: @user } %>
+    <%= render partial: "like", locals: { post: @post, user: @user } %>
+  </div>
   <h3>Comments:</h3>
   <div class="comments">
     <% @post.comments.each do |comment| %>
