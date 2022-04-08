@@ -1,10 +1,10 @@
 class LikesController < ApplicationController
   def create
     @like = current_user.likes.new(like_params)
-    @post = Post.find(params[:like][:post_id])
+    @post = Post.find(like_params[:post_id])
 
     if @like.save
-      redirect_to "#{users_path}/#{@post.author_id}/posts/#{@post.id}"
+      redirect_to user_post_path(@post)
     else
       render :new, status: :unprocessable_entity
     end
