@@ -3,7 +3,7 @@
   <div>
     <%= render partial: "users/user", locals: { user: @user } %>
   </div>
-  <% @user.posts.each do |post| %>
+  <% @user.posts.includes(:comments).each do |post| %>
     <%= render partial: "users/post", locals: { post: post, user: @user } %>
     <h3>Comments:</h3>
     <div class="comments">

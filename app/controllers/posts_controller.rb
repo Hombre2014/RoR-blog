@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts
+    @posts = @user.posts.includes(:comments)
   end
 
   def show
@@ -16,8 +16,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
+      flash[:notice] = 'Post have been created successfully.'
       redirect_to "#{users_path}/#{current_user.id}"
     else
+      flash[:alert] = 'Adding a new post failed.'
       render :new, status: :unprocessable_entity
     end
   end
