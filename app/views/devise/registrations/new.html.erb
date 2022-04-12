@@ -25,15 +25,6 @@
 
   <%= f.hidden_field :posts_counter, value: 0 %>
 
-    <%= f.label :bio %><br />
-    <%= f.text_area :bio %>
-  </div>
-
-  <div class="field">
-    <%= f.label :photo %><br />
-    <%= f.text_field :photo %>
-  </div> 
-
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>

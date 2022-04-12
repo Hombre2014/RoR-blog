@@ -1,5 +1,5 @@
-<%= form_with model: Like.new, url: "/users/#{current_user}/posts/#{@post.id}/like" do |form| %>
-  <%= form.hidden_field :author_id, value: current_user %>
+<%= form_with model: Like.new, url: "/users/#{current_user.id}/posts/#{@post.id}/like" do |form| %>
+  <%= form.hidden_field :author_id, value: current_user.id %>
   <%= form.hidden_field :post_id, value: post.id %>
 
   <div>

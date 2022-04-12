@@ -1,6 +1,6 @@
 <h2>New blog post</h2>
-<%= form_with model: @post, url: "#{user_posts_url}" do |form| %>
-  <%= form.hidden_field :author_id, value: current_user %>
+<%= form_with model: @post, url: "/users/#{current_user.id}/posts" do |form| %>
+  <%= form.hidden_field :author_id, value: current_user.id %>
 
   <div class="title">
     <%= form.label :title %><br>
