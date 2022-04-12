@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :title, length: { in: 1..250 }, presence: true, allow_blank: false
-  validates :comments_counter, numericality: { only_integer: true, greater_than: -1 }
-  validates :likes_counter, numericality: { only_integer: true, greater_than: -1 }
+  # validates :comments_counter, numericality: { only_integer: true, greater_than: -1 }
+  # validates :likes_counter, numericality: { only_integer: true, greater_than: -1 }
   validates :text, presence: true, length: { in: 1..2500 }
 
   def last_5_comments
