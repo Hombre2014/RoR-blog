@@ -12,11 +12,24 @@
 
   <body>
     <header class="top">
+      <%= render 'layouts/navbar' %>
       <h1>Yuriy's Ruby on Rails Blog</h1>
     </header>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+        <div class="notice" role="alert">
+          <strong>
+            <%= flash[:notice] %>
+          </strong>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert" role="alert">
+          <strong>
+            <%= flash[:alert] %>
+          </strong>
+        </div>
+      <% end %>
 
     <%= yield %>
     <footer class="bottom">
