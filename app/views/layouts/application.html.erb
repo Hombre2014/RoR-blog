@@ -16,7 +16,8 @@
       <h1>Yuriy's Ruby on Rails Blog</h1>
     </header>
 
-    <% if flash[:notice] %>
+    <div class="container">
+      <% if flash[:notice] %>
         <div class="notice" role="alert">
           <strong>
             <%= flash[:notice] %>
@@ -30,8 +31,15 @@
           </strong>
         </div>
       <% end %>
+      <%= yield %>
+    </div>
 
-    <%= yield %>
+    <%
+=begin%>
+ <%= yield %> 
+<%
+=end%>
+
     <footer class="bottom">
       <hr class="line">
       <span>Copyright &reg; <a class="author" href="https://github.com/Hombre2014">Yuriy Chamkoriyski</a>, 2022 All rights reserved</span>

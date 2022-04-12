@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div>
+    <ul class="nav-left">
+      <li class="nav-item">
+          <%= link_to 'Home', root_path, class: "nav-link active" %>
+        </li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <ul class="menu">
+      <% if current_user %>
+        <li class="menu-list">
+          <div>
+            <%= current_user.name %>
+          </div>
+          <div>
+            <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "link-btn" %>
+          </div>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to 'Log in', new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to 'Sign Up', new_user_registration_path %>
+        </li>
+      <% end %>
+      </ul>
+  </div>
+</nav>
