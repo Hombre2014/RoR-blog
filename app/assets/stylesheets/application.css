@@ -18,8 +18,50 @@ body {
   background-color: #d1f5f4;
 }
 
+.navbar {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+  list-style: none;
+}
+
+.nav-left {
+  padding-left: 0;
+}
+
+.nav-right {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0;
+}
+
+.menu-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 2rem;
+}
+
 .top {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logout {
+  
 }
 
 .body {

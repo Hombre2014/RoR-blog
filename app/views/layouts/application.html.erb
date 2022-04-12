@@ -12,24 +12,28 @@
 
   <body>
     <header class="top">
+      <%= render 'layouts/navbar' %>
       <h1>Yuriy's Ruby on Rails Blog</h1>
     </header>
 
-      <%
-=begin%>
- <% if flash[:alert] %>
-        <div class="w-50 alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="container">
+      <% if flash[:notice] %>
+        <div class="notice" role="alert">
+          <strong>
+            <%= flash[:notice] %>
+          </strong>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert" role="alert">
           <strong>
             <%= flash[:alert] %>
           </strong>
         </div>
-      <% end %> 
-<%
-=end%>
+      <% end %>
+      <%= yield %>
+    </div>
 
-    <%= flash[:notice] %>
-    <%= flash[:alert] %>
-    <%= yield %>
     <footer class="bottom">
       <hr class="line">
       <span>Copyright &reg; <a class="author" href="https://github.com/Hombre2014">Yuriy Chamkoriyski</a>, 2022 All rights reserved</span>
