@@ -34,6 +34,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_validations_model_spec_n+1.md)
 
+### Phase 8 - add devise
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_devise.md)
+
 ## Built With
 
 - Major languages: Ruby
