@@ -38,6 +38,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_devise.md)
 
+### Phase 9 - add authorization rules
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_add_authorization.md)
+
 ## Built With
 
 - Major languages: Ruby
