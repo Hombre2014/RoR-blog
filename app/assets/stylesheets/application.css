@@ -226,7 +226,7 @@ a:hover {
 }
 
 textarea {
-  width: 350px;
+  width: 100%;
   height: 120px;
   margin-top: 1rem;
 }
@@ -234,10 +234,26 @@ textarea {
 input {
   margin: 1rem 0;
   height: 1.5rem;
+  width: 100%;
 }
 
 .like-comment {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+}
+
+form {
+  width: 50%; 
+  margin: 0 auto; 
+}
+
+.checks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remember-checks {
+  min-width: 90%;
 }

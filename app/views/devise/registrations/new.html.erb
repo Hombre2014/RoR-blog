@@ -15,12 +15,12 @@
 
   <div class="field">
     <%= f.label :photo %><br />
-    <%= f.text_field :photo, autocomplete: "photo" %>
+    <%= f.file_field :photo, autocomplete: "photo" %>
   </div>
 
   <div class="field">
     <%= f.label :bio %><br />
-    <%= f.text_field :bio, autocomplete: "bio" %>
+    <%= f.text_area :bio, autocomplete: "bio" %>
   </div>
 
   <%= f.hidden_field :posts_counter, value: 0 %>
