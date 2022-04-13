@@ -85,6 +85,10 @@ h2 {
   width: fit-content;
 }
 
+.link-btn {
+  width: 100px;
+}
+
 .user-link,
 .link-btn {
   text-decoration: none;
@@ -159,6 +163,24 @@ p {
   align-items: baseline;
 }
 
+.author-comment {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+
+.comt-del {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.button-del {
+  float: right;
+}
+
 .comment-text {
   width: 90%;
 }
@@ -229,23 +251,47 @@ textarea {
   width: 100%;
   height: 120px;
   margin-top: 1rem;
+  padding: 0.4rem;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 input {
   margin: 1rem 0;
-  height: 1.5rem;
   width: 100%;
+  padding: 0.4rem;
 }
 
 .like-comment {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
-form {
+/* form {
+  margin: 0 auto;
+} */
+
+.comment-form {
+  width: 50%;
+}
+
+.form-submit {
   width: 50%;
   margin: 0 auto;
+}
+
+.button_to {
+  margin: 0 !important;
+}
+
+.button-cmt {
+  width: 120px;
+  margin: 0 auto;
+}
+
+.button-like {
+  width: fit-content;
+  float: right;
 }
 
 .checks {
@@ -256,4 +302,8 @@ form {
 
 .remember-checks {
   min-width: 90%;
+}
+
+.center {
+  margin: 0 auto;
 }
