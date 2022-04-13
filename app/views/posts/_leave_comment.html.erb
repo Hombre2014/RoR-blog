@@ -1,4 +1,4 @@
-<%= form_with model: Comment.new, url: "/users/#{current_user.id}/posts/#{@post.id}/create_comment" do |form| %>
+<%= form_with model: Comment.new, class: 'comment-form', url: "/users/#{current_user.id}/posts/#{@post.id}/create_comment" do |form| %>
   <%= form.hidden_field :author_id, value: current_user.id %>
   <%= form.hidden_field :post_id, value: @post.id %>
   <div class="name-meta">
@@ -10,7 +10,7 @@
     <%= form.text_area :text, placeholder: 'Leave a comment' %>
   </div>
 
-  <div>
+  <div class="button-cmt">
     <%= form.submit %>
   </div>
 <% end %>

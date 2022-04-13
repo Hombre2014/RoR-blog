@@ -38,6 +38,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_devise.md)
 
+### Phase 9 - add authorization rules
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_add_authorization.md)
+
 ## Built With
 
 - Major languages: Ruby
@@ -52,13 +56,19 @@ Run the following commands:</br>
 `rails s`</br>
 Open a browser and go to: `https://localhost:3000` to view the app.
 
-## Author
+## Authors
 
 👤 **Yuriy Chamkoriyski**
 
 - GitHub: [@Hombre2014](https://github.com/Hombre2014)
 - Twitter: [@Chamkoriyski](https://twitter.com/Chamkoriyski)
 - LinkedIn: [axebit](https://linkedin.com/in/axebit)
+
+👤 **Kalolo Chola Lemba**
+
+- GitHub: [@KayLemba](https://github.com/KayLemba)
+- Twitter: [@King_Kaylo1](https://twitter.com/King_Kaylo1)
+- LinkedIn: [Kalolo (Chola) Lemba](https://www.linkedin.com/in/kalolo-lemba-41a8339a/)
 
 ## 🤝 Contributing
 
