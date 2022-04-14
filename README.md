@@ -42,6 +42,10 @@ The project requirements can be viewed [here](https://github.com/microverseinc/c
 
 The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/blog_app_add_authorization.md)
 
+### Phase 10 - integration specs for views
+
+The project requirements can be viewed [here](https://github.com/microverseinc/curriculum-rails/blob/main/blog-app/projects/Integration_specs_project.md)
+
 ## Built With
 
 - Major languages: Ruby
@@ -56,6 +60,17 @@ Run the following commands:</br>
 `rails s`</br>
 Open a browser and go to: `https://localhost:3000` to view the app.
 
+## Testing
+
+### Integration_specs_project
+
+Run all the test individually like:
+`bundle exec rspec spec/pages/login_page_spec.rb`
+`bundle exec rspec spec/pages/post_idex_page_spec.rb`
+`bundle exec rspec spec/pages/post_show_page_spec.rb`
+`bundle exec rspec spec/pages/user_index_page_spec.rb`
+`bundle exec rspec spec/pages/user_show_page_spec.rb`
+
 ## Authors
 
 👤 **Yuriy Chamkoriyski**
@@ -63,6 +78,8 @@ Open a browser and go to: `https://localhost:3000` to view the app.
 - GitHub: [@Hombre2014](https://github.com/Hombre2014)
 - Twitter: [@Chamkoriyski](https://twitter.com/Chamkoriyski)
 - LinkedIn: [axebit](https://linkedin.com/in/axebit)
+
+### From phase 8 onwards
 
 👤 **Kalolo Chola Lemba**
 
