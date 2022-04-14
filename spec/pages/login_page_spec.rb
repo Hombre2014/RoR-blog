@@ -17,7 +17,7 @@ RSpec.describe 'Testing Login page', type: :system do
     visit '/users/sign_in'
     User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 0)
     fill_in 'user_email', with: 'tim@example.com'
-    fill_in 'user_password', with: '12345'
+    fill_in 'user_password', with: '123456'
     click_button 'Log in'
     expect(page).to have_current_path(root_path)
   end
