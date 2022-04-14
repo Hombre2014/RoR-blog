@@ -4,9 +4,10 @@ RSpec.describe 'Users controller', type: :request do
   describe 'GET #index' do
     before(:each) do
       @user = User.create!(name: 'Dick',
-        photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-        bio: 'Full-stack developer', posts_counter: 0, confirmed_at: Time.now, email: 'test@example.com', password: '123456')
-        get users_path
+                           photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
+                           bio: 'Full-stack developer', posts_counter: 0, confirmed_at: Time.now,
+                           email: 'test@example.com', password: '123456')
+      get users_path
     end
 
     it 'GET requests is a success' do
@@ -25,9 +26,10 @@ RSpec.describe 'Users controller', type: :request do
   describe 'GET #show' do
     before(:each) do
       @user = User.create!(name: 'Dick',
-        photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-        bio: 'Full-stack developer', posts_counter: 0, confirmed_at: Time.now, email: 'test@example.com', password: '123456')
-        get user_path id: @user.id
+                           photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
+                           bio: 'Full-stack developer', posts_counter: 0, confirmed_at: Time.now,
+                           email: 'test@example.com', password: '123456')
+      get user_path id: @user.id
     end
 
     it 'GET requests is success' do

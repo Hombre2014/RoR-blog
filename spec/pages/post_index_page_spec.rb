@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe 'Testing posts views', type: :feature do
   describe 'posts#index' do
     before(:each) do
@@ -60,5 +58,3 @@ RSpec.describe 'Testing posts views', type: :feature do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength
