@@ -168,8 +168,8 @@ RSpec.describe 'Posts index page', type: :system do
     fill_in 'user_password', with: user.password
     click_button 'Log in'
     visit "/users/#{user.id}/posts"
-    click_link posts[2].title
-    expect(page).to have_current_path("/users/#{user.id}/posts/#{posts[2].id}")
+    click_link posts[1].title
+    expect(page).to have_current_path("/users/#{user.id}/posts/#{posts[1].id}")
   end
 end
 
