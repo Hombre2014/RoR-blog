@@ -2,174 +2,62 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 
-RSpec.describe 'Posts index page', type: :system do
-  let!(:user) do
-    User.create!(
-      name: 'Tim',
-      email: 'tim@example.com',
-      password: '123456',
-      confirmed_at: Time.now,
-      posts_counter: 0,
-      bio: 'Full-stack web developer from Germany'
-    )
-  end
-
-  let!(:posts) do
-    [
-      Post.create!(
-        author: user,
-        title: 'First title',
-        text: 'First text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Second title',
-        text: 'Second text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Third title',
-        text: 'Third text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Fourth title',
-        text: 'Fourth text',
-        likes_counter: 0,
-        comments_counter: 0
-      )
-    ]
-  end
-
-  let!(:comments) do
-    [
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 1'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 2'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 3'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 4'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 5'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 6'
-      )
-    ]
-  end
-
-  let!(:likes) do
-    [
-      Like.create!(post: posts[0], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user)
-    ]
-  end
-
-  it 'should check to see if there is a username' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    expect(page).to have_content(user.name)
-  end
-
-  it 'should check to see if there is a correct number of posts' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    expect(page).to have_content("Number of posts: #{user.posts_counter}")
-  end
-
-  it 'should check to see if all the post have titles' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    posts.each do |post|
-      expect(page).to have_content(post.title)
+RSpec.describe 'Testing posts views', type: :feature do
+  describe 'posts#index' do
+    before(:each) do
+      first_user = User.create!(name: 'Tom', photo: 'photo.jpg', bio: 'Teacher from Mexico.', email: 'to@example.com',
+                                password: 'password', confirmed_at: Time.now, posts_counter: 0)
+      (1..5).each { |i| first_user.posts.create title: "Post number #{i}", text: "This is my #{i} post!" }
+      Comment.create! author: first_user, post: Post.last, text: 'Hi, tom!'
+      Like.create! author: first_user, post: Post.last
+      visit user_session_path
+      fill_in 'Email',	with: 'to@example.com'
+      fill_in 'Password',	with: 'password'
+      click_button 'Log in'
+      visit user_posts_path user_id: first_user.id
     end
-  end
 
-  it 'should check to se if there all post have texts' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    posts.each do |post|
-      expect(page).to have_content(post.text)
+    it "I can see the user's profile picture." do
+      expect(page.find('img')['src']).to have_content 'photo.jpg'
     end
-  end
 
-  it 'should check to see only the last 5 comments' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    5.times do |i|
-      expect(page).to have_content(comments[i + 1].text)
+    it "I can see the user's username." do
+      expect(page).to have_content 'Tom'
     end
-    expect(page).not_to have_content(comments[0].text)
-  end
 
-  it 'should check that the number of likes are correct' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    expect(page).to have_content(posts[1].likes.length.to_s)
-    expect(page).to have_content(posts[0].likes.length.to_s)
-  end
+    it 'I can see the number of posts the user has written.' do
+      expect(page).to have_content 'Number of posts: 5'
+    end
 
-  it 'should check to see if there is a button labeled Next' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    expect(page).to have_button('Next')
-  end
+    it "I can see a post's title." do
+      expect(page).to have_content 'Post number 1'
+    end
 
-  it 'should check if clicking  on the post\'s title loads its page' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts"
-    click_link posts[1].title
-    expect(page).to have_current_path("/users/#{user.id}/posts/#{posts[1].id}")
+    it "I can see some of the post's body." do
+      expect(page).to have_content 'This is my 1 post'
+    end
+
+    it 'I can see the first comments on a post.' do
+      expect(page).to have_content 'Comments:'
+      expect(page).to have_content 'Hi, tom!'
+    end
+
+    it 'I can see how many comments a post has.' do
+      expect(page).to have_content 'Comments: 1'
+    end
+
+    it 'I can see how many likes a post has.' do
+      expect(page).to have_content 'Likes: 1'
+    end
+
+    it 'I can see a section for pagination if there are more posts than fit on the view.' do
+      expect(page).to have_content 'Next'
+    end
+
+    it "When I click on a post, it redirects me to that post's show page." do
+      click_on 'Post number 1'
+      expect(current_path).to eq user_post_path user_id: User.last.id, id: Post.first.id
+    end
   end
 end
 

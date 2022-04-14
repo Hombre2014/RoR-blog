@@ -2,116 +2,46 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 
-RSpec.describe 'Posts show page', type: :system do
-  let!(:user) do
-    User.create!(
-      name: 'Tim',
-      email: 'tim@example.com',
-      password: '123456',
-      confirmed_at: Time.now,
-      posts_counter: 3,
-      bio: 'Full-stack web developer from Germany'
-    )
-  end
+RSpec.describe 'Testing posts views', type: :feature do
+  describe 'post#show views' do
+    before(:each) do
+      first_user = User.create!(name: 'Tom', photo: 'photo.jpg', bio: 'Teacher from Mexico.', email: 'to@example.com',
+                                password: 'password', confirmed_at: Time.now, posts_counter: 0)
+      (1..5).each { |i| first_user.posts.create title: "Post number #{i}", text: "This is my #{i} post!" }
+      Comment.create! author: first_user, post: Post.last, text: 'Hi, tom!'
+      Like.create! author: first_user, post: Post.last
+      visit user_session_path
+      fill_in 'Email',	with: 'to@example.com'
+      fill_in 'Password',	with: 'password'
+      click_button 'Log in'
+      visit user_post_path user_id: first_user.id, id: Post.last.id
+    end
 
-  let!(:posts) do
-    [
-      Post.create!(
-        author: user,
-        title: 'First title',
-        text: 'First text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Second title',
-        text: 'Second text',
-        likes_counter: 0,
-        comments_counter: 0
-      )
-    ]
-  end
+    it "I can see the post's title." do
+      expect(page).to have_content 'Post number 5'
+    end
 
-  let!(:comments) do
-    [
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 1'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 2'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 3'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 4'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 5'
-      ),
-      Comment.create!(
-        author: user,
-        post: posts[1],
-        text: 'Comment 6'
-      )
-    ]
-  end
+    it 'I can see who wrote the post.' do
+      expect(page).to have_content 'by Tom'
+    end
 
-  let!(:likes) do
-    [
-      Like.create!(post: posts[0], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user)
-    ]
-  end
+    it 'I can see how many comments it has.' do
+      expect(page).to have_content 'Comments: 1'
+    end
 
-  it 'should check to see who is the author of the post' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts/#{posts[1].id}"
-    expect(page).to have_link(posts[1].author.name)
-  end
+    it 'I can see how many likes it has.' do
+      expect(page).to have_content 'Likes: 1'
+    end
 
-  it 'should checks to see the correct number of comments' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts/#{posts[1].id}"
-    expect(page).to have_content(posts[1].comments.length.to_s)
-  end
+    it 'I can see the post body.' do
+      expect(page).to have_content 'This is my 5 post!'
+    end
 
-  it 'should check to see the correct number of likes' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts/#{posts[1].id}"
-    expect(page).to have_content(posts[1].likes.length.to_s)
-  end
-
-  it "should check to see all comments author\'s names" do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}/posts/#{posts[1].id}"
-    comments.each do |comment|
-      expect(page).to have_content(comment.author.name)
+    it 'I can see the username of each commentor.' do
+      expect(page).to have_content 'Tom:'
+    end
+    it 'I can see the comment each commentor left' do
+      expect(page).to have_content 'Hi, tom!'
     end
   end
 end

@@ -1,49 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe 'Users index page', type: :system do
-  let!(:users) do
-    [
-      User.create!(
-        name: 'Tim',
-        email: 'tim@example.com',
-        password: '123456',
-        confirmed_at: Time.now,
-        posts_counter: 1
-      ),
-      User.create!(
-        name: 'Tom',
-        email: 'tom@example.com',
-        password: '123456',
-        confirmed_at: Time.now,
-        posts_counter: 2
-      ),
-      User.create!(
-        name: 'Anna',
-        email: 'anna@example.com',
-        password: '123456',
-        confirmed_at: Time.now,
-        posts_counter: 3
-      )
-    ]
-  end
-
-  it 'should check to see if all of the users are displayed' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: users[0].email
-    fill_in 'user_password', with: users[0].password
-    click_button 'Log in'
-    users.each do |user|
-      expect(page).to have_content(user.name)
+RSpec.describe 'Testing users views', type: :feature do
+  describe 'user#index views' do
+    before(:each) do
+      User.create!(name: 'Tom', photo: 'photo.jpg', bio: 'Teacher from Mexico.', email: 'to@example.com',
+                   password: 'password', confirmed_at: Time.now, posts_counter: 0)
+      visit user_session_path
+      fill_in 'Email',	with: 'to@example.com'
+      fill_in 'Password',	with: 'password'
+      click_button 'Log in'
     end
-  end
 
-  it 'should check to see the correct number of posts' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: users[0].email
-    fill_in 'user_password', with: users[0].password
-    click_button 'Log in'
-    users.each do |user|
-      expect(page).to have_content("Number of posts: #{user.posts_counter}")
+    it 'I can see the username of all other users.' do
+      expect(page).to have_content 'Tom'
+    end
+
+    it 'I can see the profile picture for each user.' do
+      expect(page.find('img')['src']).to have_content 'photo.jpg'
+    end
+
+    it 'I can see the number of posts each user has written.' do
+      expect(page).to have_content 'Number of posts: 0'
+    end
+
+    it "When I click on a user, I am redirected to that user's show page" do
+      click_on 'Tom'
+      expect(current_path).to eq user_path User.first.id
     end
   end
 end

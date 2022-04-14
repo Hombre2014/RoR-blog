@@ -1,105 +1,53 @@
 require 'rails_helper'
 
-RSpec.describe 'Users show page', type: :system do
-  let!(:user) do
-    User.create!(
-      name: 'Tom',
-      email: 'tom@example.com',
-      password: '123456',
-      confirmed_at: Time.now,
-      posts_counter: 4,
-      bio: 'Full-stack web developer from Germany'
-    )
-  end
-
-  let!(:posts) do
-    [
-      Post.create!(
-        author: user,
-        title: 'First title',
-        text: 'First text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Second title',
-        text: 'Second text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Third title',
-        text: 'Third text',
-        likes_counter: 0,
-        comments_counter: 0
-      ),
-      Post.create!(
-        author: user,
-        title: 'Fourth title',
-        text: 'Fourth text',
-        likes_counter: 0,
-        comments_counter: 0
-      )
-    ]
-  end
-
-  it 'should check to see the user\'s username' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    expect(page).to have_content(user.name)
-  end
-
-  it 'should check to see the correct number of posts' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    expect(page).to have_content("Number of posts: #{user.posts_counter}")
-  end
-
-  it 'should check to see that the user has a bio' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    expect(page).to have_content(user.bio)
-  end
-
-  it 'should check to see the first 3 posts' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    3.times do |i|
-      expect(page).to have_content(posts[i].title)
-      expect(page).to have_content(posts[i].text)
+RSpec.describe 'Testing users views', type: :feature do
+  describe 'users#show views' do
+    before(:each) do
+      first_user = User.create!(name: 'Tom', photo: 'photo.jpg', bio: 'Teacher from Mexico.', email: 'to@example.com',
+                                password: 'password', confirmed_at: Time.now, posts_counter: 0)
+      (1..5).each { |i| first_user.posts.create title: "Post number #{i}", text: "This is my #{i} post!" }
+      visit user_session_path
+      fill_in 'Email',	with: 'to@example.com'
+      fill_in 'Password',	with: 'password'
+      click_button 'Log in'
+      visit user_path first_user.id
     end
-  end
 
-  it 'should verify that there is a link "See all posts"' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    expect(page).to have_link('See all posts')
-  end
+    it "I can see the user's profile picture." do
+      expect(page.find('img')['src']).to have_content 'photo.jpg'
+    end
 
-  it 'should verify that clicking on "See all posts" goes to the right page' do
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_button 'Log in'
-    visit "/users/#{user.id}"
-    click_link 'See all posts'
-    expect(page).to have_current_path("/users/#{user.id}/posts")
+    it "I can see the user's username." do
+      expect(page).to have_content 'Tom'
+    end
+
+    it 'I can see the number of posts the user has written.' do
+      expect(page).to have_content 'Number of posts: 5'
+    end
+
+    it "I can see the user's bio." do
+      expect(page).to have_content 'Teacher from Mexico'
+    end
+
+    it "I can see the user's first 3 posts." do
+      expect(page).to have_content 'Post number 5'
+      expect(page).to have_content 'Post number 4'
+      expect(page).to have_content 'Post number 3'
+      expect(page).to have_no_content 'Post number 2'
+    end
+
+    it "I can see a button that lets me view all of a user's posts." do
+      expect(page.find('a', text: 'See all')).to have_content 'See all'
+    end
+
+    it "When I click a user's post, it redirects me to that post's show page." do
+      click_on 'Post number 5'
+      expect(current_path).to eq user_post_path user_id: Post.last.author.id, id: Post.last.id
+    end
+
+    it "When I click to see all posts, it redirects me to the user's post's index page." do
+      click_link("See all posts")
+      expect(current_path).to eq "/users/#{User.last.id}/posts"
+    end
   end
 end

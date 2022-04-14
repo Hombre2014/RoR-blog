@@ -1,24 +1,34 @@
 require 'rails_helper'
 
-RSpec.describe 'Testing Login page', type: :system do
-  it 'should render the login page' do
-    visit '/users/sign_in'
-    expect(page).to have_content('Log in')
+RSpec.describe 'Login page', type: :feature do
+  before(:each) do
+    User.create!(name: 'Tom', photo: 'photo.jpg', bio: 'Teacher from Mexico.', email: 'to@example.com',
+                 password: 'password', confirmed_at: Time.now, posts_counter: 0)
+    visit user_session_path
   end
 
-  it 'should have email and password fields and login button' do
-    visit '/users/sign_in'
-    expect(page).to have_field('Email')
-    expect(page).to have_field('Password')
-    expect(page).to have_button('Log in')
+  it 'I can see the username and password inputs and the Submit button.' do
+    expect(page).to have_field(type: 'email')
+    expect(page).to have_field(type: 'password')
+    expect(page).to have_button(type: 'submit')
   end
 
-  it 'should have correct user inputs' do
-    visit '/users/sign_in'
-    User.create!(name: 'Tim', email: 'tim@example.com', password: '123456', confirmed_at: Time.now, posts_counter: 0)
-    fill_in 'user_email', with: 'tim@example.com'
-    fill_in 'user_password', with: '123456'
+  it 'When I click the submit button without filling in the username and the password, I get a detailed error.' do
     click_button 'Log in'
-    expect(page).to have_current_path(root_path)
+    expect(page).to have_content 'Invalid Email or password.'
+  end
+
+  it 'When I submit incorrect data get a detailed error.' do
+    fill_in 'Email',	with: 'ttt@exaple.com'
+    fill_in 'Password',	with: 'sometext'
+    click_button 'Log in'
+    expect(page).to have_content 'Invalid Email or password'
+  end
+
+  it 'When I click the submit button I am redirected to the root page.' do
+    fill_in 'Email',	with: 'to@example.com'
+    fill_in 'Password',	with: 'password'
+    click_button 'Log in'
+    expect(current_path).to eq root_path
   end
 end
