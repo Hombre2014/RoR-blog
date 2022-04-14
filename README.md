@@ -60,6 +60,17 @@ Run the following commands:</br>
 `rails s`</br>
 Open a browser and go to: `https://localhost:3000` to view the app.
 
+## Testing
+
+### Integration_specs_project
+
+Run all the test individually like:
+`bundle exec rspec spec/pages/login_page_spec.rb`
+`bundle exec rspec spec/pages/post_idex_page_spec.rb`
+`bundle exec rspec spec/pages/post_show_page_spec.rb`
+`bundle exec rspec spec/pages/user_index_page_spec.rb`
+`bundle exec rspec spec/pages/user_show_page_spec.rb`
+
 ## Authors
 
 👤 **Yuriy Chamkoriyski**
