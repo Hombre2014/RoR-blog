@@ -84,10 +84,10 @@ RSpec.describe 'Posts index page', type: :system do
 
   let!(:likes) do
     [
+      Like.create!(post: posts[0], author: user),
       Like.create!(post: posts[1], author: user),
       Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[0], author: user)
+      Like.create!(post: posts[1], author: user)
     ]
   end
 

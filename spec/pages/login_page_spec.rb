@@ -6,7 +6,7 @@ RSpec.describe 'Testing Login page', type: :system do
     expect(page).to have_content('Log in')
   end
 
-  it 'should has email, password fields and login button' do
+  it 'should have email and password fields and login button' do
     visit '/users/sign_in'
     expect(page).to have_field('Email')
     expect(page).to have_field('Password')

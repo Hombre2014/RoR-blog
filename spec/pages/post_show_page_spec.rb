@@ -70,14 +70,14 @@ RSpec.describe 'Posts show page', type: :system do
 
   let!(:likes) do
     [
+      Like.create!(post: posts[0], author: user),
       Like.create!(post: posts[1], author: user),
       Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[1], author: user),
-      Like.create!(post: posts[0], author: user)
+      Like.create!(post: posts[1], author: user)
     ]
   end
 
-  it 'should check to see who wrote the post' do
+  it 'should check to see who is the author of the post' do
     visit '/users/sign_in'
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
@@ -104,7 +104,7 @@ RSpec.describe 'Posts show page', type: :system do
     expect(page).to have_content(posts[1].likes.length.to_s)
   end
 
-  it "should check to see all comments and author\'s names" do
+  it "should check to see all comments author\'s names" do
     visit '/users/sign_in'
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
